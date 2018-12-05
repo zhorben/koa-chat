@@ -5,6 +5,15 @@
 version: 2
 jobs:
   build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:8.9.4
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
     working_directory: ~/var/www/krasnoevino.ml/html
 
     steps:
@@ -18,10 +27,9 @@ jobs:
           - v1-dependencies-
 
       - run: yarn install
+      
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-
